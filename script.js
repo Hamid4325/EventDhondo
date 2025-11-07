@@ -38,7 +38,7 @@ window.onload = () => {
 
                 card.innerHTML = `
                   <div class="card-image">
-                    <img src="${event.imageURL ? event.imageURL : 'placeholder.png'}" alt="${event.eventName}">
+                    <img src="${event.url ? event.url : 'placeholder.png'}" alt="${event.eventName}">
                   </div>
                   <div class="card-content">
                     <h3>${event.eventName}</h3>
@@ -64,4 +64,5 @@ window.onload = () => {
         });
 
 };
+
 
