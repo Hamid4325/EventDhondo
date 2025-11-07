@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Tech Events</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <!-- We can add an actual image logo later. For now, text works great. -->
-            <a href="index.html">EventDhondo</a>
-        </div>
-        <nav>
-            <a href="index.html">Events</a>
-            <a href="newsletter.html">Become a Member</a>
-        </nav>
-    </header>
+    <div class="logo">
+        <a href="index.html"><i class="fa-solid fa-magnifying-glass"></i>EventDhondo</a>
+    </div>
+    <nav class="desktop-nav">
+        <a href="index.html" class="active">Events</a>
+        <a href="newsletter.html">Become a Member</a>
+        <!-- We will add the submit link here later -->
+    </nav>
+    <div id="hamburger-icon">&#9776;</div>
+</header>
+<nav id="mobile-nav">
+    <a href="index.html" class="active">Events</a>
+    <a href="newsletter.html">Become a Member</a>
+    <!-- We will add the submit link here later -->
+</nav>
 
     <main>
         <h1>Upcoming Tech Events for Students</h1>
@@ -29,4 +36,5 @@
     <!-- We link the JavaScript file at the end of the body -->
     <script src="script.js"></script>
 </body>
+
 </html>
