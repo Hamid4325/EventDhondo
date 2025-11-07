@@ -37,7 +37,7 @@ window.onload = () => {
 
                 card.innerHTML = `
                   <div class="card-image">
-                    <img src="${event.imageURL ? event.imageURL : 'images/placeholder.png'}" alt="${event.eventName}">
+                    <img src="${event.imageURL ? event.imageURL : 'placeholder.png'}" alt="${event.eventName}">
                   </div>
                   <div class="card-content">
                     <h3>${event.eventName}</h3>
@@ -61,4 +61,5 @@ window.onload = () => {
             console.error('There was a problem fetching the event data:', error);
             eventContainer.innerHTML = '<p>Sorry, we could not load the events at this time.</p>';
         });
+
 };
