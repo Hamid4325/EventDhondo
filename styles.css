@@ -7,6 +7,56 @@ body {
 }
 
 /* --- NEW Header & Navigation --- */
+/* --- Responsive Navigation Styles --- */
+
+/* By default, hide the hamburger icon and mobile nav */
+#hamburger-icon {
+    display: none;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+#mobile-nav {
+    display: none;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+#mobile-nav a {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #f0f2f5;
+    text-decoration: none;
+    color: #1c1e21;
+    font-weight: 600;
+}
+
+#mobile-nav a.active {
+    color: #007bff;
+}
+
+
+/* --- Media Query for Mobile Devices --- */
+/* When the screen is 768px wide or less, apply these styles */
+@media (max-width: 768px) {
+    /* Hide the desktop navigation links */
+    .desktop-nav {
+        display: none;
+    }
+
+    /* Show the hamburger icon */
+    #hamburger-icon {
+        display: block;
+    }
+
+    /* We use a class toggled by JavaScript to show the mobile nav */
+    #mobile-nav.active {
+        display: flex;
+    }
+}
+
 header {
     background-color: #ffffff;
     padding: 0 40px; /* Vertical padding is 0 */
@@ -193,4 +243,5 @@ main {
 
 .form-container button:hover {
     background-color: #218838;
+
 }
