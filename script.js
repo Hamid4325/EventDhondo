@@ -31,6 +31,7 @@ window.onload = () => {
 
             // Loop through each event in the array
             events.forEach(event => {
+                console.log(event);
                 // Create a new <div> element for the event card
                 const card = document.createElement('div');
                 card.className = 'event-card'; // Add the CSS class for styling
@@ -63,3 +64,4 @@ window.onload = () => {
         });
 
 };
+
