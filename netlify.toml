@@ -1,12 +1,8 @@
-# This is the Netlify configuration file.
-# This is the Netlify configuration file.
-
+# Netlify configuration file
 [build]
   # This command tells Netlify to find and replace our placeholders.
   # It automatically uses the secure environment variables you set in the Netlify UI.
-  command = "sed -i 's|__SHEETY_API_URL__|'\"$SHEETY_API_URL\"'|g' script.js && sed -i 's|__GOOGLE_SCRIPT_URL__|'\"$GOOGLE_SCRIPT_URL\"'|g' newsletter.html"
+  command = "sed -i 's|__SHEETY_API_URL__|'\"$SHEETY_API_URL\"'|g' script.js && sed -i 's|__GOOGLE_SCRIPT_URL__|'\"$GOOGLE_SCRIPT_URL\"'|g' index.html"
   
   # This tells Netlify where our final website files are.
   publish = "."
-
-
