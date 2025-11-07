@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
                 card.setAttribute('data-category', event.eventType.toLowerCase());
 
                 // Use placeholder if ImageURL is missing
-                const imageUrl = event.imageURL ? event.imageURL : 'placeholder.png';
+                const imageUrl = event.imageUrl ? event.imageUrl : 'placeholder.png';
 
                 card.innerHTML = `
                     <div class="portfolio-image-container" style="background-image: url('${imageUrl}');">
@@ -60,3 +60,4 @@ window.addEventListener('load', () => {
             eventContainer.innerHTML = `<div class="no-events-message"><h3>Unable to Load Events</h3><p>Please check your connection and try again later.</p></div>`;
         });
 });
+
