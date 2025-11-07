@@ -12,14 +12,23 @@
 <body>
 
     <header>
-        <div class="logo">
-            <a href="index.html">EventDhondo</a>
-        </div>
-        <nav>
-            <a href="index.html">Events</a>
-            <a href="newsletter.html" class="active">Become a Member</a>
-        </nav>
-    </header>
+    <div class="logo">
+        <a href="index.html">EventDhondo</a>
+    </div>
+    <nav class="desktop-nav">
+        <a href="index.html">Events</a>
+        <a href="newsletter.html" class="active">Become a Member</a>
+        <a href="https://forms.gle/pgJ69FYea6UnuHFLA" target="_blank">Submit Event</a>
+        <!-- We will add the submit link here later -->
+    </nav>
+    <div id="hamburger-icon">&#9776;</div>
+</header>
+<nav id="mobile-nav">
+    <a href="index.html">Events</a>
+    <a href="newsletter.html" class="active">Become a Member</a>
+    <!-- We will add the submit link here later -->
+    <a href="https://forms.gle/pgJ69FYea6UnuHFLA" target="_blank">Submit Event</a>
+</nav>
 
     <main>
         <div class="form-container">
@@ -27,11 +36,6 @@
             <p>Get a list of upcoming student-friendly tech events delivered to your inbox every week. No spam, ever.
             </p>
 
-            <!-- 
-              IMPORTANT: This form will NOT work locally. 
-              The 'data-netlify="true"' attribute tells Netlify to handle the submissions
-              once we deploy the website.
-            -->
             <form id="subscribe-form">
                 <input type="email" name="email" placeholder="Enter your email address" required>
                 <button type="submit">Subscribe</button>
@@ -39,7 +43,7 @@
         </div>
     </main>
 
-
+    <script src="main.js"></script>
     <script>
         // Paste your Web App URL from Google Apps Script here
         const GOOGLE_SCRIPT_URL = '__GOOGLE_SCRIPT_URL__'; 
@@ -75,5 +79,6 @@
     </script>
 
 </body>
+
 
 </html>
