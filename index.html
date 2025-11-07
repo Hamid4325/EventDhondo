@@ -177,76 +177,83 @@
     <script src="main.js"></script>
     <script src="script.js"></script>
     <script>
-        // Newsletter form handling
-        const GOOGLE_SCRIPT_URL = '__GOOGLE_SCRIPT_URL__';
-        const form = document.getElementById('subscribe-form');
-        const formMessage = document.getElementById('form-message');
-        const submitButton = form.querySelector('.submit-button');
+    // --- CORRECTED Newsletter form handling ---
+    const GOOGLE_SCRIPT_URL = '__GOOGLE_SCRIPT_URL__';
+    const form = document.getElementById('subscribe-form');
+    const formMessage = document.getElementById('form-message');
+    const submitButton = form.querySelector('.submit-button');
 
-        form.addEventListener('submit', e => {
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Subscribing...';
+
+        const email = form.querySelector('input[name="email"]').value;
+
+        // The corrected fetch request
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            // No 'mode' or 'headers' needed here. We send the data as a simple string.
+            body: JSON.stringify({ email: email })
+        })
+        .then(response => {
+            // Check if the server responded with an OK status
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the JSON response from the script
+        })
+        .then(data => {
+            // Check the 'result' field from our Google Script's response
+            if (data.result === 'success') {
+                formMessage.style.display = 'block';
+                formMessage.style.background = 'rgba(39, 174, 96, 0.2)';
+                formMessage.style.border = '1px solid rgba(39, 174, 96, 0.5)';
+                formMessage.style.color = '#27ae60';
+                formMessage.innerHTML = '<h3>🎉 Welcome Aboard!</h3><p>Thank you for subscribing! Check your inbox for updates.</p>';
+
+                form.reset();
+                submitButton.textContent = 'Subscribed! ✓';
+                submitButton.style.background = '#27ae60';
+            } else {
+                // If the script returned an error, display it
+                throw new Error(data.message || 'An unknown error occurred.');
+            }
+        })
+        .catch(error => {
+            // This .catch() will now catch REAL errors
+            console.error('Error:', error);
+            formMessage.style.display = 'block';
+            formMessage.style.background = 'rgba(231, 76, 60, 0.2)';
+            formMessage.style.border = '1px solid rgba(231, 76, 60, 0.5)';
+            formMessage.style.color = '#e74c3c';
+            formMessage.textContent = 'Oops! Something went wrong. Please try again.';
+
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+        });
+    });
+
+    // Filter links in footer (this part is unchanged)
+    document.querySelectorAll('.footer-links a[data-filter]').forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-
-            const originalText = submitButton.textContent;
-            submitButton.disabled = true;
-            submitButton.textContent = 'Subscribing...';
-
-            const email = form.querySelector('input[name="email"]').value;
-
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email })
-            })
-                .then(() => {
-                    formMessage.style.display = 'block';
-                    formMessage.style.background = 'rgba(39, 174, 96, 0.2)';
-                    formMessage.style.border = '1px solid rgba(39, 174, 96, 0.5)';
-                    formMessage.style.color = '#27ae60';
-                    formMessage.innerHTML = '<h3>🎉 Welcome to EventDhondo!</h3><p>Thank you for subscribing! You\'ll receive your first event update soon.</p>';
-
-                    form.reset();
-                    submitButton.textContent = 'Subscribed! ✓';
-                    submitButton.style.background = '#27ae60';
-
-                    setTimeout(() => {
-                        submitButton.textContent = originalText;
-                        submitButton.disabled = false;
-                        submitButton.style.background = '';
-                    }, 3000);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    formMessage.style.display = 'block';
-                    formMessage.style.background = 'rgba(231, 76, 60, 0.2)';
-                    formMessage.style.border = '1px solid rgba(231, 76, 60, 0.5)';
-                    formMessage.style.color = '#e74c3c';
-                    formMessage.textContent = 'Oops! Something went wrong. Please try again.';
-
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalText;
+            const filter = link.getAttribute('data-filter');
+            const filterBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+            if (filterBtn) {
+                filterBtn.click();
+                window.scrollTo({
+                    top: document.getElementById('events').offsetTop - 80,
+                    behavior: 'smooth'
                 });
+            }
         });
-
-        // Filter links in footer
-        document.querySelectorAll('.footer-links a[data-filter]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const filter = link.getAttribute('data-filter');
-                const filterBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
-                if (filterBtn) {
-                    filterBtn.click();
-                    window.scrollTo({
-                        top: document.getElementById('events').offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 
 </html>
+
 
